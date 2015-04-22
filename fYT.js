@@ -1,6 +1,9 @@
 (function() {
 
+    var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/master/index.html';
+
     var YTPlayer = function(elem, options) {
+        var iframe;
 
         var isElement = function(obj){
             try {
@@ -13,20 +16,34 @@
         //do all initialization and iframe creation
         if (arguments.length >= 1) {
             if (!isElement(elem)) {
-                elem = document.querySelector(elem);
+                elem = document.querySelector('#' + elem);
                 if (!elem) {
-                    elem = document.createElement('iframe');
-                    document.body.appendChild(elem);
-                    //set elem styles
-                }
+                    throw 'no DOM TAG for a Player';
+                } else if (elem.nodeName !== 'IFRAME') {
+                    iframe = document.createElement('iframe');
+                    iframe.setAttribute('frameborder', 0);
+                    iframe.setAttribute('allowfullscreen', 1);
+                    iframe.title = 'file YouTube video player';
+                    elem.parentNode.insertBefore(iframe, elem);
+                    var elem_id = elem.id;
+                    var elem_class = elem.className;
+                    var width = elem.offsetWidth;
+                    var height = elem.offsetHeight;
+
+                    elem.remove();
+                    iframe.id = elem_id;
+                    iframe.className = elem_class;
+
+                } else
+                    iframe = elem;
             }
 
-            elem.src = 'http://youtubepl.local';
+            iframe.src = BASE_URL;
         }
 
 
         function sendCommand(cmd, msg) {
-            document.querySelector('iframe').contentWindow.getCommand(cmd, msg);
+            iframe.contentWindow.getCommand(cmd, msg);
         }
 
 

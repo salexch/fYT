@@ -1,8 +1,24 @@
+<!DOCTYPE html>
 <html>
 	<head>
+        <style>
+            #player {
+                width: 500px;
+                height: 300px;
+            }
+        </style>
 		<script src="fYT.js"></script>
+	</head>
+	<body>
+<!--
+        <div id="player"></div>
+-->
+<!--
+		<iframe id="player" src="https://cdn.rawgit.com/salexch/fYT/master/index.html" style="border:0;"></iframe>
+-->
+        <iframe id="player" style="border:0;"></iframe>
         <script>
-            var player = new fYT.Player();
+            var player = new fYT.Player('player');
             player.onReady = function(event) {
                 console.log('player ready', event);
                 player.loadPlaylist({
@@ -23,8 +39,5 @@
                 player.stopVideo();
             }
         </script>
-	</head>
-	<body>
-		<iframe src="https://raw.githubusercontent.com/salexch/fYT/master/index.html" style="border:0;"><iframe>
-	<body>
+    </body>
 </html>
