@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<style>
+			html, body {
+				height: 100%;
+				width: 100%;
+			}
+		</style>
+		<script>
+			function getCommand(cmd, args) {
+				if (!player)
+					return false;
+
+				player[cmd].apply(player, args);
+			}
+			
+			function sendPlayerEvent(event, args) {
+				var parent_player = window.parent.player;
+				parent_player[event].apply(parent_player[event], args);
+			}
+		</script>
+	</head>
+	<body>
+		<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+		<div id="player"></div>		
+		<script>
+			// 2. This code loads the IFrame Player API code asynchronously.
+			var tag = document.createElement('script');
+
+			tag.src = "https://www.youtube.com/iframe_api";
+			var firstScriptTag = document.getElementsByTagName('script')[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+			var player;
+			
+			function onYouTubeIframeAPIReady() {
+				//window.parent.onYouTubeIframeAPIReady();
+				player = new YT.Player('player', {
+					events: {
+						'onError': function onPlayerError(error_id) {
+							sendPlayerEvent('onError', arguments);
+						},
+						'onReady': function onPlayerReady(event) {
+							sendPlayerEvent('onReady', arguments);
+						},
+						'onStateChange': function() {
+							sendPlayerEvent('onStateChange', arguments);
+						}
+					}					
+				});
+			}			
+		</script>
+	<body>
+</html>
