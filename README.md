@@ -1,2 +1,3 @@
 # fYT
 This project is to allow access youtube api from file scheme, like file://...
+its aim to mimic real youtube api
