@@ -1,6 +1,28 @@
 <html>
 	<head>
 		<script src="fYT.js"></script>
+        <script>
+            var player = new fYT.Player();
+            player.onReady = function(event) {
+                console.log('player ready', event);
+                player.loadPlaylist({
+                    list:'PLacrNTP1FPJgtxRFo-W48IP3jF-G1CDNE',
+                    listType:'playlist'
+                });
+            };
+
+            var done = false;
+            player.onStateChange = function(event) {
+                if (event.data == fYT.PlayerState.PLAYING && !done) {
+                    setTimeout(stopVideo, 6000);
+                    done = true;
+                }
+            };
+
+            function stopVideo() {
+                player.stopVideo();
+            }
+        </script>
 	</head>
 	<body>
 		<iframe src="https://raw.githubusercontent.com/salexch/fYT/master/index.html" style="border:0;"><iframe>
