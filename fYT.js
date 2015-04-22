@@ -8,7 +8,7 @@
         var isElement = function(obj){
             try {
                 return obj instanceof HTMLElement;
-            }catch(e){}
+            } catch(e) {}
 
             return false;
         };
@@ -42,18 +42,18 @@
         }
 
 
-        function sendCommand(cmd, msg) {
-            iframe.contentWindow.getCommand(cmd, msg);
+        function sendCommand(cmd, args) {
+            iframe.contentWindow.getCommand(cmd, args);
         }
 
 
         return {
             //methods
-            loadPlaylist: function(obj) {
-                sendCommand('loadPlaylist', [obj]);
+            loadPlaylist: function() {
+                sendCommand('loadPlaylist', arguments);
             },
-            loadVideoById: function(obj) {
-                sendCommand('loadVideoById', [obj]);
+            loadVideoById: function() {
+                sendCommand('loadVideoById', arguments);
             },
             stopVideo: function() {
                 sendCommand('stopVideo', []);
