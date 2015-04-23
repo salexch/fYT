@@ -1,9 +1,7 @@
 (function() {
 
-    var instances = [];
-
-    var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/master/index.html';
-    //var BASE_URL = 'http://youtubepl.local';
+    //var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/master/index.html';
+    var BASE_URL = 'http://youtubepl.local';
 
     var YTPlayer = function(elem, options) {
         var iframe;
@@ -41,16 +39,13 @@
                     iframe = elem;
             }
 
-            instances.push(this);
+            var that = this;
+            iframe.onload = function() {
+                this.contentWindow.parent_player = that;
+                this.contentWindow.init();
+            };
 
-            var hash = 0;
-            for(var i in instances)
-                if (instances[i] == this) {
-                    hash = i;
-                    break;
-                }
-
-            iframe.src = BASE_URL + '#' + hash;
+            iframe.src = BASE_URL;
         }
 
 
@@ -127,9 +122,6 @@
     };
 
     this.fYT = {
-        getPlayer: function(index) {
-            return instances[~~index];
-        },
         Player: YTPlayer,
         PlayerState: {
             ENDED: 0,
