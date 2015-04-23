@@ -1,6 +1,6 @@
 (function() {
 
-    var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/master/index.html';
+    var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/85d1be86c278d056910b07b05e4868ba1f08fbb4/index.html';
     //var BASE_URL = 'http://youtubepl.local';
 
     var YTPlayer = function(elem, options) {
