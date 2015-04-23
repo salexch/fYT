@@ -39,6 +39,8 @@
             }
 
             iframe.src = BASE_URL;
+
+            iframe.contentWindow.parent_player = this;
         }
 
 
@@ -55,8 +57,47 @@
             loadVideoById: function() {
                 sendCommand('loadVideoById', arguments);
             },
+            loadVideoByUrl: function() {
+                sendCommand('loadVideoByUrl', arguments);
+            },
+            playVideo: function() {
+                sendCommand('playVideo', []);
+            },
+            pauseVideo: function() {
+                sendCommand('pauseVideo', []);
+            },
             stopVideo: function() {
                 sendCommand('stopVideo', []);
+            },
+            seekTo: function() {
+                sendCommand('seekTo', arguments);
+            },
+            clearVideo: function() {
+                sendCommand('clearVideo', arguments);
+            },
+            nextVideo: function() {
+                sendCommand('nextVideo', []);
+            },
+            previousVideo: function() {
+                sendCommand('previousVideo', []);
+            },
+            playVideoAt: function() {
+                sendCommand('playVideoAt', arguments);
+            },
+            mute: function() {
+                sendCommand('mute', []);
+            },
+            unMute: function() {
+                sendCommand('unMute', []);
+            },
+            isMuted: function() { //return boolean
+                sendCommand('isMuted', []);
+            },
+            setVolume: function() {
+                sendCommand('setVolume', arguments);
+            },
+            getVolume: function() { //returns integer
+                sendCommand('getVolume', []);
             },
             //events
             onReady: function() {},

@@ -7,6 +7,8 @@
 			}
 		</style>
 		<script>
+            var parent_player;
+
 			function getCommand(cmd, args) {
 				if (!player)
 					return false;
@@ -15,7 +17,6 @@
 			}
 			
 			function sendPlayerEvent(event, args) {
-				var parent_player = window.parent.player;
 				parent_player[event].apply(parent_player[event], args);
 			}
 		</script>
