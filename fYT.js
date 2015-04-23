@@ -1,7 +1,7 @@
 (function() {
 
-    var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/85d1be86c278d056910b07b05e4868ba1f08fbb4/index.html';
-    //var BASE_URL = 'http://youtubepl.local';
+    //var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/85d1be86c278d056910b07b05e4868ba1f08fbb4/index.html';
+    var BASE_URL = 'http://youtubepl.local';
 
     var YTPlayer = function(elem, options) {
         var iframe;
@@ -28,21 +28,31 @@
                     elem.parentNode.insertBefore(iframe, elem);
                     var elem_id = elem.id;
                     var elem_class = elem.className;
-                    var width = elem.offsetWidth;
-                    var height = elem.offsetHeight;
+                    var elem_width = elem.offsetWidth;
+                    var elem_height = elem.offsetHeight;
 
                     elem.remove();
                     iframe.id = elem_id;
                     iframe.className = elem_class;
-
+                    iframe.style.width = elem_width + 'px';
+                    iframe.style.height = elem_height + 'px';
                 } else
                     iframe = elem;
             }
 
+            if (options && options.width)
+                iframe.style.width = options.width + 'px';
+            if (options && options.height)
+                iframe.style.height = options.height + 'px';
+
+            options = options || {};
+            options.width = iframe.offsetWidth;
+            options.height = iframe.offsetHeight;
+
             var that = this;
             iframe.onload = function() {
                 this.contentWindow.parent_player = that;
-                this.contentWindow.init();
+                this.contentWindow.init(options);
             };
 
             iframe.src = BASE_URL;

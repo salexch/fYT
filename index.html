@@ -4,6 +4,7 @@
 			html, body {
 				height: 100%;
 				width: 100%;
+                margin: 0;
 			}
 		</style>
 		<script>
@@ -25,7 +26,10 @@
 		<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
 		<div id="player"></div>		
 		<script>
-            function init() {
+            var options;
+
+            function init(opts) {
+                options = opts;
                 // 2. This code loads the IFrame Player API code asynchronously.
                 var tag = document.createElement('script');
 
@@ -39,6 +43,8 @@
 			function onYouTubeIframeAPIReady() {
 				//window.parent.onYouTubeIframeAPIReady();
 				player = new YT.Player('player', {
+                    width: options.width,
+                    height: options.height,
 					events: {
 						'onError': function onPlayerError(error_id) {
 							sendPlayerEvent('onError', arguments);
