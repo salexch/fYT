@@ -7,7 +7,7 @@
 			}
 		</style>
 		<script>
-            var parent_player;
+            var parent_player = window.parent.fYT.getPlayer(location.hash.substring(1));
 
 			function getCommand(cmd, args) {
 				if (!player)

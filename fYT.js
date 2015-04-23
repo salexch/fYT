@@ -1,6 +1,9 @@
 (function() {
 
+    var instances = [];
+
     var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/master/index.html';
+    //var BASE_URL = 'http://youtubepl.local';
 
     var YTPlayer = function(elem, options) {
         var iframe;
@@ -38,9 +41,16 @@
                     iframe = elem;
             }
 
-            iframe.src = BASE_URL;
+            instances.push(this);
 
-            iframe.contentWindow.parent_player = this;
+            var hash = 0;
+            for(var i in instances)
+                if (instances[i] == this) {
+                    hash = i;
+                    break;
+                }
+
+            iframe.src = BASE_URL + '#' + hash;
         }
 
 
@@ -48,77 +58,78 @@
             return iframe.contentWindow.getCommand(cmd, args);
         }
 
+        //methods
+        this.loadPlaylist = function() {
+            sendCommand('loadPlaylist', arguments);
+        };
+        this.loadVideoById = function() {
+            sendCommand('loadVideoById', arguments);
+        };
+        this.loadVideoByUrl = function() {
+            sendCommand('loadVideoByUrl', arguments);
+        };
+        this.playVideo = function() {
+            sendCommand('playVideo', []);
+        };
+        this.pauseVideo = function() {
+            sendCommand('pauseVideo', []);
+        };
+        this.stopVideo = function() {
+            sendCommand('stopVideo', []);
+        };
+        this.seekTo = function() {
+            sendCommand('seekTo', arguments);
+        };
+        this.clearVideo = function() {
+            sendCommand('clearVideo', arguments);
+        };
+        this.nextVideo = function() {
+            sendCommand('nextVideo', []);
+        };
+        this.previousVideo = function() {
+            sendCommand('previousVideo', []);
+        };
+        this.playVideoAt = function() {
+            sendCommand('playVideoAt', arguments);
+        };
+        this.mute = function() {
+            sendCommand('mute', []);
+        };
+        this.unMute = function() {
+            sendCommand('unMute', []);
+        };
+        this.isMuted = function() { //return boolean
+            return sendCommand('isMuted', []);
+        };
+        this.setVolume = function() {
+            sendCommand('setVolume', arguments);
+        };
+        this.getVolume = function() { //returns integer
+            return sendCommand('getVolume', []);
+        };
+        this.setLoop = function() {
+            sendCommand('setLoop', arguments);
+        };
+        this.setShuffle = function() {
+            sendCommand('setShuffle', arguments);
+        };
+        this.getPlayerState = function() {
+            return sendCommand('getPlayerState', []);
+        };
+        this.getCurrentTime = function() {
+            return sendCommand('getCurrentTime', []);
+        };
+        //events
+        this.onReady = function() {};
+        this.onStateChange = function() {};
+        this.onError = function() {};
 
-        return {
-            //methods
-            loadPlaylist: function() {
-                sendCommand('loadPlaylist', arguments);
-            },
-            loadVideoById: function() {
-                sendCommand('loadVideoById', arguments);
-            },
-            loadVideoByUrl: function() {
-                sendCommand('loadVideoByUrl', arguments);
-            },
-            playVideo: function() {
-                sendCommand('playVideo', []);
-            },
-            pauseVideo: function() {
-                sendCommand('pauseVideo', []);
-            },
-            stopVideo: function() {
-                sendCommand('stopVideo', []);
-            },
-            seekTo: function() {
-                sendCommand('seekTo', arguments);
-            },
-            clearVideo: function() {
-                sendCommand('clearVideo', arguments);
-            },
-            nextVideo: function() {
-                sendCommand('nextVideo', []);
-            },
-            previousVideo: function() {
-                sendCommand('previousVideo', []);
-            },
-            playVideoAt: function() {
-                sendCommand('playVideoAt', arguments);
-            },
-            mute: function() {
-                sendCommand('mute', []);
-            },
-            unMute: function() {
-                sendCommand('unMute', []);
-            },
-            isMuted: function() { //return boolean
-                return sendCommand('isMuted', []);
-            },
-            setVolume: function() {
-                sendCommand('setVolume', arguments);
-            },
-            getVolume: function() { //returns integer
-                return sendCommand('getVolume', []);
-            },
-            setLoop: function() {
-                sendCommand('setLoop', arguments);
-            },
-            setShuffle: function() {
-                sendCommand('setShuffle', arguments);
-            },
-            getPlayerState: function() {
-                return sendCommand('getPlayerState', []);
-            },
-            getCurrentTime: function() {
-                return sendCommand('getCurrentTime', []);
-            },
-            //events
-            onReady: function() {},
-            onStateChange: function() {},
-            onError: function() {}
-        }
     };
 
     this.fYT = {
+        getPlayer: function(index) {
+            return instances[~~index];
+        },
         Player: YTPlayer,
         PlayerState: {
             ENDED: 0,
