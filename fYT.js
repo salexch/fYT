@@ -45,7 +45,7 @@
 
 
         function sendCommand(cmd, args) {
-            iframe.contentWindow.getCommand(cmd, args);
+            return iframe.contentWindow.getCommand(cmd, args);
         }
 
 
@@ -91,13 +91,25 @@
                 sendCommand('unMute', []);
             },
             isMuted: function() { //return boolean
-                sendCommand('isMuted', []);
+                return sendCommand('isMuted', []);
             },
             setVolume: function() {
                 sendCommand('setVolume', arguments);
             },
             getVolume: function() { //returns integer
-                sendCommand('getVolume', []);
+                return sendCommand('getVolume', []);
+            },
+            setLoop: function() {
+                sendCommand('setLoop', arguments);
+            },
+            setShuffle: function() {
+                sendCommand('setShuffle', arguments);
+            },
+            getPlayerState: function() {
+                return sendCommand('getPlayerState', []);
+            },
+            getCurrentTime: function() {
+                return sendCommand('getCurrentTime', []);
             },
             //events
             onReady: function() {},

@@ -17,7 +17,7 @@
 			}
 			
 			function sendPlayerEvent(event, args) {
-				parent_player[event].apply(parent_player[event], args);
+				return parent_player[event].apply(parent_player[event], args);
 			}
 		</script>
 	</head>
