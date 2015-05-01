@@ -1,7 +1,9 @@
-(function() {
+;(function() {
 
-    var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/0fe5ef2986fac1ce5e2252b7fdbbb04c1a77b884/index.html';
-    //var BASE_URL = 'http://youtubepl.local';
+    //var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/0fe5ef2986fac1ce5e2252b7fdbbb04c1a77b884/index.html';
+    var BASE_URL = 'http://youtubepl.local';
+
+    //TODO add playerVars.origin = DOMAIN_NAME
 
     var YTPlayer = function(elem, options) {
         var iframe;
@@ -16,6 +18,8 @@
 
         //do all initialization and iframe creation
         if (arguments.length >= 1) {
+            options = options || {};
+
             if (!isElement(elem)) {
                 elem = document.querySelector('#' + elem);
                 if (!elem) {
@@ -38,14 +42,16 @@
                     iframe.style.height = elem_height + 'px';
                 } else
                     iframe = elem;
-            }
+            } else if (elem.nodeName != 'IFRAME') {
+
+            } else
+                iframe = elem;
 
             if (options && options.width)
                 iframe.style.width = options.width + 'px';
             if (options && options.height)
                 iframe.style.height = options.height + 'px';
 
-            options = options || {};
             options.width = iframe.offsetWidth;
             options.height = iframe.offsetHeight;
 

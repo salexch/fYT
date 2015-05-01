@@ -24,7 +24,7 @@
 	</head>
 	<body>
 		<!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
-		<div id="player"></div>		
+		<div id="player"></div>
 		<script>
             var options;
 
@@ -41,7 +41,6 @@
 			var player;
 			
 			function onYouTubeIframeAPIReady() {
-				//window.parent.onYouTubeIframeAPIReady();
 				player = new YT.Player('player', {
                     width: options.width,
                     height: options.height,
