@@ -1,7 +1,7 @@
 ;(function() {
 
-    //var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/0fe5ef2986fac1ce5e2252b7fdbbb04c1a77b884/index.html';
-    var BASE_URL = 'http://youtubepl.local';
+    var BASE_URL = 'https://cdn.rawgit.com/salexch/fYT/44ffcf0b2f52cb99696ec57002889a24f4fa3c4d/index.html';
+    //var BASE_URL = 'http://youtubepl.local';
 
     //TODO add playerVars.origin = DOMAIN_NAME
 
