@@ -49,6 +49,7 @@
 				player = new YT.Player('player', {
                     width: options.width,
                     height: options.height,
+					controls: options.controls || 1,
 					events: {
 						'onError': function onPlayerError(error_id) {
 							sendPlayerEvent('onError', arguments);
