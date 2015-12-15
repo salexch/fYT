@@ -19,7 +19,7 @@
 				if (!player)
 					return false;
 
-				player[cmd].apply(player, args);
+				return player[cmd].apply(player, args);
 			}
 			
 			function sendPlayerEvent(event, args) {
