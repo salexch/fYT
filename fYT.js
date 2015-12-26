@@ -55,6 +55,9 @@
             options.width = iframe.offsetWidth;
             options.height = iframe.offsetHeight;
 
+            if (options.metatag && options.metatag.width)
+                BASE_URL += '?metatag_width=' + options.metatag.width;
+
             var that = this;
             iframe.onload = function() {
                 this.contentWindow.parent_player = that;

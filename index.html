@@ -1,5 +1,28 @@
 <html>
 	<head>
+		<script>
+			var params = {};
+			location.search.substr(1).split('&').map(function(pair) {
+				if (!pair)
+					return;
+
+				var field = pair.split('=');
+				var value = field[1];
+				field = field[0];
+
+				if (field)
+					params[field] = value;
+			});
+
+			var meta_elem = document.createElement('meta');
+			meta_elem.name = 'viewport';
+			meta_elem.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0';
+
+			if (Object.keys(params).length && params.metatag_width)
+				meta_elem.content = meta_elem.content.replace('device-width', params.metatag_width);
+
+			document.head.appendChild(meta_elem);
+		</script>
 		<style>
 			html, body {
 				height: 100%;
